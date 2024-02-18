@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block title %}MalikAuto - Création d'un véhicule
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1 class="mt-4">Création d'un véhicule</h1>
+
+		{{ form_start(form) }}
+
+		<div class="form-group">
+			{{ form_label(form.nom) }}
+			{{ form_widget(form.nom) }}
+			<div class="form-error">
+				{{ form_errors(form.nom) }}
+			</div>
+		</div>
+
+		<div class="form-group">
+			{{ form_label(form.modele) }}
+			{{ form_widget(form.modele) }}
+			<div class="form-error">
+				{{ form_errors(form.modele) }}
+			</div>
+		</div>
+		<div class="form-group">
+			{{ form_label(form.description) }}
+			{{ form_widget(form.description) }}
+			<div class="form-error">
+				{{ form_errors(form.description) }}
+			</div>
+		</div>
+		<div class="form-group">
+			{{ form_label(form.image) }}
+			{{ form_widget(form.image) }}
+			<div class="form-error">
+				{{ form_errors(form.image) }}
+			</div>
+		</div>
+		<div class="form-group">
+			{{ form_row(form._token) }}
+		</div>
+
+		<div class="form-group m-3">
+			{{ form_row(form.submit) }}
+		</div>
+	</div>
+
+
+</div>
+{{ form_end(form) }}</div>{% endblock %}

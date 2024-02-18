@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MalikAuto - Nos véhicules
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-4">
+		{% if not vehicules.items is same as([]) %}
+
+			<h1>Nos Véhicules</h1>
+			<a href="{{ path('vehicule.new') }}" class="btn btn-primary">
+				Créer un véhicule
+			</a>
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success mt-4">
+					{{ message }}
+				</div>
+			{% endfor %}
+			<div class="d-flex justify-content-between">
+				<div class="count text-start d-flex align-items-center">
+					Il y a
+					{{ vehicules.getTotalItemCount }}
+					véhicules au total.
+				</div>
+				<div class="navigation mt-3 ml-auto">
+					{{ knp_pagination_render(vehicules) }}
+				</div>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">Identifient</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Modéle</th>
+						<th scope="col">Déscription</th>
+						<th scope="col">Date de création</th>
+						<th scope="col">image</th>
+						<th scope="col">En vente</th>
+						<th scope="col">Edition</th>
+						<th scope="col">Suppresion</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for vehicule in vehicules %}
+						<tr class="table-primary">
+							<th scope="row">{{ vehicule.id }}</th>
+							<td>{{ vehicule.nom }}</td>
+							<td>{{ vehicule.modele }}</td>
+							<td>{{ vehicule.description }}</td>
+							<td>{{ vehicule.dateCreation|date('d/m/Y') }}</td>
+							<td>{{ vehicule.image }}</td>
+							<td>{{ vehicule.enVente }}</td>
+							<td>
+								<a href="{{ path('vehicule.edit', { id: vehicule.id }) }}" class="btn btn-info">Modifier</a>
+							</td>
+							<td>
+								<a href="{{ path('vehicule.delete', { id: vehicule.id }) }}" class="btn btn-warning">Supprimer</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="d-flex justify-content-between">
+				<div class="count text-start d-flex align-items-center">
+					Il y a
+					{{ vehicules.getTotalItemCount }}
+					véhicules au total.
+				</div>
+				<div class="navigation mt-3 ml-auto">
+					{{ knp_pagination_render(vehicules) }}
+				</div>
+			</div>
+		{% else %}
+			<h4>Il n'y a pas de vehicule</h4>
+		{% endif %}
+	</div>
+{% endblock %}
