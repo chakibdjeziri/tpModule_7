@@ -12,17 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 class AdminController extends AbstractController
 {
-    /**
-     * this controller display all ingredient
-     *
-     * @param IngredientRepository $repository
-     * @param PaginatorInterface $paginator
-     * @param Request $request
-     * @return Response
-     */
-
     #[Route('/admin', name: 'app_admin', methods: ['GET'])]
     public function index(VehiculeRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -35,14 +27,6 @@ class AdminController extends AbstractController
             'vehicules' => $vehicules,
         ]);
     }
-
-    /**
-     * This controller show a form which create an ingredient
-     *
-     * @param Request $request
-     * @param EntityManagerInterface $manager
-     * @return Response
-     */
 
     #[Route('/admin/creation', 'vehicule.new')]
     public function new(
@@ -66,15 +50,6 @@ class AdminController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
-    /**
-     * This controller allow us to edit an ingredient
-     *
-     * @param Ingredient $ingredient
-     * @param Request $request
-     * @param EntityManagerInterface $manager
-     * @return Response
-     */
 
     #[Route('/admin/edition/{id}', 'vehicule.edit', methods: ['GET', 'POST'])]
     public function edit(
@@ -103,14 +78,6 @@ class AdminController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
-    /**
-     * This controller allows us to delete an ingredient
-     *
-     * @param EntityManagerInterface $manager
-     * @param Ingredient $ingredient
-     * @return Response
-     */
 
     #[Route('/admin/suppression/{id}', 'vehicule.delete', methods: ['GET'])]
     public function delete(

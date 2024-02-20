@@ -19,7 +19,7 @@ class HomeController extends AbstractController
         $vehicules = $paginator->paginate(
             $repository->findAll(),
             $request->query->getInt('page', 1),
-            6
+            9
         );
         return $this->render('home/index.html.twig', [
             'vehicules' => $vehicules,

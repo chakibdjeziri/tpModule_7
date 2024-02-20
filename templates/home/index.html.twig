@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}symRecipe - Accueil
+{% block title %}MalikAuto - Accueil
 {% endblock %}
 
 {% block body %}
 	<div class="container mt-4">
+		<h1 class="display-4 p-2 text-center">Bienvenue sur MalikAuto</h1>
+		<h3 class="lead text-center">Votre Destination Automobile en Ligne</h3>
 		{% if not vehicules.items is same as([]) %}
 			<div class="jumbotron text-center">
-				<h1 class="display-4 p-2">Bienvenue sur MalikAuto</h1>
-				<h3 class="lead">Votre Destination Automobile en Ligne</h3>
 				<div class="d-flex justify-content-between">
 					<div class="count text-start d-flex align-items-center">
 						Il y a
@@ -37,32 +37,49 @@
 										</h5>
 										<h5 class="card-title">{{ vehicule.modele }}
 										</h5>
-										<p class="card-text">{{ vehicule.description }}</p>
+										<p class="card-text">{{ vehicule.description|slice(0, 50) }}</p>
+										{% if vehicule.description|length > 100 %}
+											<button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#modal{{ vehicule.id }}">Voir plus</button>
+										{% endif %}
 									</div>
 									<div class="card-footer">
-										<h5 class="card-title">Publier le :
+										<h5 class="card-title">Publié le :
 											{{ vehicule.dateCreation|date('d/m/Y') }}
 										</h5>
-
+									</div>
+									<div class="modal fade" id="modal{{ vehicule.id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ vehicule.id }}" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="modalLabel{{ vehicule.id }}">Description complète</h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													{{ vehicule.description }}
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						{% endfor %}
 					</div>
 				</tbody>
-			</table>
-			<div class="d-flex justify-content-between">
-				<div class="count text-start d-flex align-items-center">
-					Il y a
-					{{ vehicules.getTotalItemCount }}
-					véhicules au total.
+				<div class="d-flex justify-content-between">
+					<div class="count text-start d-flex align-items-center">
+						Il y a
+						{{ vehicules.getTotalItemCount }}
+						véhicules au total.
+					</div>
+					<div class="navigation mt-3 ml-auto">
+						{{ knp_pagination_render(vehicules) }}
+					</div>
 				</div>
-				<div class="navigation mt-3 ml-auto">
-					{{ knp_pagination_render(vehicules) }}
-				</div>
-			</div>
-		{% else %}
-			<h4>Il n'y a pas d'véhicule</h4>
-		{% endif %}
-	</div>
-{% endblock %}
+			{% else %}
+				<h4>Il n'y a pas d'véhicule</h4>
+			{% endif %}
+		</div>
+	{% endblock %}

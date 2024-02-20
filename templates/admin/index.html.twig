@@ -5,73 +5,108 @@
 
 {% block body %}
 	<div class="container mt-4">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-4">
+				{{ message }}
+			</div>
+		{% endfor %}
 		{% if not vehicules.items is same as([]) %}
-
-			<h1>Nos Véhicules</h1>
-			<a href="{{ path('vehicule.new') }}" class="btn btn-primary">
-				Créer un véhicule
-			</a>
-			{% for message in app.flashes('success') %}
-				<div class="alert alert-success mt-4">
-					{{ message }}
+			<div class="jumbotron text-center">
+				<h1 class="display-4">MalikAuto</h1>
+				<p class="lead">Votre Destination Automobile en Ligne.</p>
+				<h2 class="display-4 mt-4">Bienvenue dans l'espace administrateur !
+				</h2>
+				<hr class="my-4">
+				<p class="lead">Pour enrichir notre catalogue et offrir une expérience exceptionnelle aux utilisateurs, ajoutez dès maintenant un nouveau véhicule à notre inventaire.
+					<br>Cliquez sur le bouton ci-dessous pour démarrer le processus de création.</p>
+				<div class="btn-group d-flex justify-content-around">
+					<p class="lead">
+						<a class="btn btn-success btn-lg" href="{{ path('vehicule.new') }}" role="button">Créer un véhicule</a>
+					</p>
+					<p class="lead">
+						<a class="btn btn-primary btn-lg" href="{{ path('security.registration') }}" role="button">Créer un Admin</a>
+					</p>
 				</div>
-			{% endfor %}
-			<div class="d-flex justify-content-between">
-				<div class="count text-start d-flex align-items-center">
-					Il y a
-					{{ vehicules.getTotalItemCount }}
-					véhicules au total.
+				<hr class="my-4">
+				<div class="d-flex justify-content-between">
+					<div class="count text-start d-flex align-items-center mt-4">
+						Il y a
+						{{ vehicules.getTotalItemCount }}
+						véhicules au total.
+					</div>
+					<div class="navigation mt-3 ml-auto">
+						{{ knp_pagination_render(vehicules) }}
+					</div>
 				</div>
-				<div class="navigation mt-3 ml-auto">
-					{{ knp_pagination_render(vehicules) }}
-				</div>
-			</div>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col">Identifient</th>
-						<th scope="col">Nom</th>
-						<th scope="col">Modéle</th>
-						<th scope="col">Déscription</th>
-						<th scope="col">Date de création</th>
-						<th scope="col">image</th>
-						<th scope="col">En vente</th>
-						<th scope="col">Edition</th>
-						<th scope="col">Suppresion</th>
-					</tr>
-				</thead>
-				<tbody>
+				<div class="row">
 					{% for vehicule in vehicules %}
-						<tr class="table-primary">
-							<th scope="row">{{ vehicule.id }}</th>
-							<td>{{ vehicule.nom }}</td>
-							<td>{{ vehicule.modele }}</td>
-							<td>{{ vehicule.description }}</td>
-							<td>{{ vehicule.dateCreation|date('d/m/Y') }}</td>
-							<td>{{ vehicule.image }}</td>
-							<td>{{ vehicule.enVente }}</td>
-							<td>
-								<a href="{{ path('vehicule.edit', { id: vehicule.id }) }}" class="btn btn-info">Modifier</a>
-							</td>
-							<td>
-								<a href="{{ path('vehicule.delete', { id: vehicule.id }) }}" class="btn btn-warning">Supprimer</a>
-							</td>
-						</tr>
+						<div class="col-md-4 mb-4">
+							<div class="card mb-3 text-center d-flex flex-column h-100" style="max-width: 540px; overflow: hidden;">
+								<div class="row g-0">
+									<div class="col-md-4">
+										<h5 class="card-title mt-1">#{{ vehicule.id }}</h5>
+										<div class="text-body-secondary">Publié le :
+											{{ vehicule.dateCreation|date('d/m/Y') }}</div>
+										<h5 class="card-title mt-2">{{ vehicule.nom }}</h5>
+										<h5 class="card-title mt-2">{{ vehicule.modele }}</h5>
+										<a href="{{ path('vehicule.edit', { id: vehicule.id }) }}" class="btn btn-warning mt-2">Modifier</a>
+										<a href="{{ path('vehicule.delete', { id: vehicule.id }) }}" class="btn btn-danger mt-2">Supprimer</a>
+										<div class="mt-auto">
+											{% if vehicule.description|length > 100 %}
+												<button class="btn btn-link mt-2" data-bs-toggle="modal" data-bs-target="#modal{{ vehicule.id }}">Voir plus</button>
+											{% endif %}
+										</div>
+									</div>
+									<div class="col-md-8">
+										<div class="card-body d-flex flex-column">
+											<img src="{{ vehicule.image }}" class="img-fluid rounded-start" alt="Image du véhicule">
+											<p class="card-text overflow-hidden mt-2" style="max-height: 100px;">{{ vehicule.description }}</p>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Modal -->
+							<div class="modal fade" id="modal{{ vehicule.id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ vehicule.id }}" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="modalLabel{{ vehicule.id }}">Description complète</h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											{{ vehicule.description }}
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					{% endfor %}
-				</tbody>
-			</table>
-			<div class="d-flex justify-content-between">
-				<div class="count text-start d-flex align-items-center">
-					Il y a
-					{{ vehicules.getTotalItemCount }}
-					véhicules au total.
 				</div>
-				<div class="navigation mt-3 ml-auto">
-					{{ knp_pagination_render(vehicules) }}
-				</div>
+			</p>
+		</div>
+		<div class="d-flex justify-content-between">
+			<div class="count text-start d-flex align-items-center">
+				Il y a
+				{{ vehicules.getTotalItemCount }}
+				véhicules au total.
 			</div>
-		{% else %}
-			<h4>Il n'y a pas de vehicule</h4>
-		{% endif %}
+			<div class="navigation mt-3 ml-auto">
+				{{ knp_pagination_render(vehicules) }}
+			</div>
+		</div>
 	</div>
-{% endblock %}
+{% else %}
+	<div class="jumbotron text-center">
+		<h1 class="display-4">Hello, world!</h1>
+		<p class="lead">Bienvenue dans l'espace administrateur ! Pour enrichir notre catalogue et offrir une expérience exceptionnelle aux utilisateurs, ajoutez dès maintenant un nouveau véhicule à notre inventaire. Cliquez sur le bouton ci-dessous pour démarrer le processus de création.</p>
+		<hr class="my-4">
+		<p>N'oubliez pas de fournir des détails complets, des images attractives et toutes les informations pertinentes pour susciter l'intérêt des acheteurs potentiels. Ensemble, faisons de chaque visite une opportunité de découverte automobile passionnante !</p>
+		<p class="lead">
+			<a class="btn btn-primary btn-lg" href="{{ path('vehicule.new') }}" role="button">Créer un véhicule</a>
+		</p>
+	</div>
+{% endif %}</div>{% endblock %}

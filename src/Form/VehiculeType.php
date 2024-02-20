@@ -84,9 +84,8 @@ class VehiculeType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Créer mon ingrédient'
-            ])
-        ;
+                'label' => 'Créer un véhicule'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

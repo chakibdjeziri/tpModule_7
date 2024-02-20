@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\UserAdmin;
 use DateTime;
 use App\Entity\Vehicule;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -12,7 +13,6 @@ use Faker\Generator;
 class AppFixtures extends Fixture
 {
     private Generator $faker;
-
     public function __construct()
     {
         $this->faker = Factory::create('fr_FR');
@@ -20,17 +20,31 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        // Users
+        $users = [];
+
+        $admin = new UserAdmin();
+        $admin->setPseudo('Administrateur de MalikAuto')
+            ->SetEmail('admin@malikauto.fr')
+            ->setRoles(['ROLE_ADMIN'])
+            ->setPlainPassword('admin');
+
+        $users[] = $admin;
+        $manager->persist($admin);
+
+
         for ($i = 1; $i < 51; $i++) {
             $vehicule = new Vehicule();
-            $vehicule->setNom($this->faker->word())
-                ->setModele($this->faker->word(2, true))
-                ->setDescription($this->faker->text(300))
+            $vehicule->setNom('BMW')
+                ->setModele('M3')
+                ->setDescription($this->faker->text(1000))
                 ->setDateCreation(DateTime::createFromFormat('d/m/Y', $this->faker->date('d/m/Y')))
-                ->setImage($this->faker->imageUrl(360, 360, 'car', true, 'citadine', true, 'jpg'))
+                ->setImage('https://media.istockphoto.com/id/1401806376/fr/photo/bmw-m3-bleue.jpg?s=1024x1024&w=is&k=20&c=CXODJ2HijBGGPmAem7S4FUpiQzi8E61vXbd8QRo9hgs=')
                 ->setEnVente($this->faker->boolean());
 
             $manager->persist($vehicule);
         }
+
 
         $manager->flush();
     }
