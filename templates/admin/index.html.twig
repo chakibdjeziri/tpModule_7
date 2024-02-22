@@ -26,6 +26,9 @@
 					<p class="lead">
 						<a class="btn btn-primary btn-lg" href="{{ path('security.registration') }}" role="button">Créer un Admin</a>
 					</p>
+					<p class="lead">
+						<a class="btn btn-primary btn-lg" href="{{ path('user.edit.password') }}" role="button">modifier mon mot de passe</a>
+					</p>
 				</div>
 				<hr class="my-4">
 				<div class="d-flex justify-content-between">
@@ -107,6 +110,9 @@
 		<p>N'oubliez pas de fournir des détails complets, des images attractives et toutes les informations pertinentes pour susciter l'intérêt des acheteurs potentiels. Ensemble, faisons de chaque visite une opportunité de découverte automobile passionnante !</p>
 		<p class="lead">
 			<a class="btn btn-primary btn-lg" href="{{ path('vehicule.new') }}" role="button">Créer un véhicule</a>
+		</p>
+		<p class="lead">
+			<a class="btn btn-primary btn-lg" href="{{ path('user.edit.password') }}" role="button">modifier mon mot de passe</a>
 		</p>
 	</div>
 {% endif %}</div>{% endblock %}
