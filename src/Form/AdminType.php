@@ -47,7 +47,8 @@ class AdminType extends AbstractType
                     'class' => 'form-label  mt-4'
                 ],
                 'constraints' => [
-                    new Assert\Length(['min' => 1, 'max' => 180])
+                    new Assert\Length(['min' => 1, 'max' => 180]),
+                    new Assert\Email(),
                 ]
             ])
             ->add('plainPassword', PasswordType::class, [
