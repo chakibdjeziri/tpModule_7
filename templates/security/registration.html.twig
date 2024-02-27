@@ -6,6 +6,11 @@
 
 {% block body %}
 	<div class="container">
+		<div class="d-flex m-4 justify-content-end">
+			<a href="{{ path('app_admin') }}" class="btn btn-primary">
+				Retour
+			</a>
+		</div>
 		<h1 class="mt-4">Formulaire d'inscription</h1>
 		{{ form(form) }}
 		</div>

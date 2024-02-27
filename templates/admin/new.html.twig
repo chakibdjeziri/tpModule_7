@@ -5,6 +5,11 @@
 
 {% block body %}
 	<div class="container">
+		<div class="d-flex m-4 justify-content-end">
+			<a href="{{ path('app_admin') }}" class="btn btn-primary">
+				Retour
+			</a>
+		</div>
 		<div class="jumbotron text-center">
 			<h1 class="mt-4">Création d'un véhicule</h1>
 			<hr class="my-4">
@@ -47,7 +52,6 @@
 		<div class="form-group">
 			{{ form_row(form._token) }}
 		</div>
-
 		<div class="form-group m-3">
 			{{ form_row(form.submit) }}
 		</div>

@@ -12,8 +12,7 @@
 		{% endfor %}
 		{% if not vehicules.items is same as([]) %}
 			<div class="jumbotron text-center">
-				<h2 class="display-4 mt-4">Bonjour {{ app.user.pseudo }},</h2>
-				<h2 class="display-4 mt-4">Bienvenue dans l'espace administrateur !</h2>
+				<h2 class="display-4 mt-4">Bonjour {{ app.user.pseudo }}</h2>
 				<hr class="my-4">
 				<p class="lead">Pour enrichir notre catalogue et offrir une expérience exceptionnelle aux utilisateurs, ajoutez dès maintenant un nouveau véhicule à notre inventaire.
 					<br>Cliquez sur le bouton ci-dessous pour démarrer le processus de création.</p>
@@ -48,7 +47,7 @@
 										<h5 class="card-title mt-2">{{ vehicule.nom }}</h5>
 										<h5 class="card-title mt-2">{{ vehicule.modele }}</h5>
 										<a href="{{ path('vehicule.edit', { id: vehicule.id }) }}" class="btn btn-warning mt-2">Modifier</a>
-										<a href="{{ path('vehicule.delete', { id: vehicule.id }) }}" class="btn btn-danger mt-2">Supprimer</a>
+										<a href="{{ path('vehicule.delete', { id: vehicule.id }) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce vehicule ?')" class="btn btn-danger mt-2">Supprimer</a>
 										<div class="mt-auto">
 											{% if vehicule.description|length > 100 %}
 												<button class="btn btn-link mt-2" data-bs-toggle="modal" data-bs-target="#modal{{ vehicule.id }}">Voir plus</button>
