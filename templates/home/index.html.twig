@@ -5,6 +5,11 @@
 
 {% block body %}
 	<div class="container mt-4">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-4">
+				{{ message }}
+			</div>
+		{% endfor %}
 		<h1 class="display-4 p-2 text-center">Bienvenue sur MalikAuto</h1>
 		<h3 class="lead text-center">Votre Destination Automobile en Ligne</h3>
 		{% if not vehicules.items is same as([]) %}

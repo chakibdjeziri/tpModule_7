@@ -14,7 +14,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserAdminController extends AbstractController
 {
-    #[Route('/utilisateur/edition/{id}', name: 'app_user_admin', methods: ['GET', 'POST'])]
+    #[Route('/utilisateur/edition/{id}', name: 'user.edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         EntityManagerInterface $manager,
@@ -95,6 +95,22 @@ class UserAdminController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+
+    #[Route('/utilisateur/suppression/{id}', 'user.delete', methods: ['GET'])]
+    public function delete(
+        EntityManagerInterface $manager,
+        UserAdmin $user
+    ): Response {
+        $manager->remove($user);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'Votre compte a été supprimé avec succès !'
+        );
+
+        return $this->redirectToRoute('security.login');
+    }
+
 }
-
-
