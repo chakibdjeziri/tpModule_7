@@ -16,15 +16,15 @@
 				{# L'utilisateur est connecté, affiche le lien de déconnexion avec confirmation #}
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon compte</a>
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.pseudo }}</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="{{ path('user.edit', {id : app.user.id}) }}">modifier mon pseudo</a>
+							<a class="dropdown-item" href="{{ path('user.edit', {id : app.user.id}) }}">modifier mes information</a>
 							<a class="dropdown-item" href="{{ path('user.edit.password', {id : app.user.id}) }}">modifier mon mot de passe</a>
 							<a class="dropdown-item" onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte Administrateur ?')" href="{{ path('user.delete', {id : app.user.id}) }}">supprimer mon compte</a>
 						</div>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_admin') }}">admin</a>
+						<a class="nav-link" href="{{ path('app_admin') }}">Admin</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#" onclick="confirmLogout()">Déconnexion</a>

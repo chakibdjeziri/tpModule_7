@@ -12,10 +12,8 @@
 		{% endfor %}
 		{% if not vehicules.items is same as([]) %}
 			<div class="jumbotron text-center">
-				<h1 class="display-4">MalikAuto</h1>
-				<p class="lead">Votre Destination Automobile en Ligne.</p>
-				<h2 class="display-4 mt-4">Bienvenue dans l'espace administrateur !
-				</h2>
+				<h2 class="display-4 mt-4">Bonjour {{ app.user.pseudo }},</h2>
+				<h2 class="display-4 mt-4">Bienvenue dans l'espace administrateur !</h2>
 				<hr class="my-4">
 				<p class="lead">Pour enrichir notre catalogue et offrir une expérience exceptionnelle aux utilisateurs, ajoutez dès maintenant un nouveau véhicule à notre inventaire.
 					<br>Cliquez sur le bouton ci-dessous pour démarrer le processus de création.</p>
