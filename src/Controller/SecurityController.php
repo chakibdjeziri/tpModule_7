@@ -13,6 +13,13 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    /**
+     * Ce contrôleur nous permet de nous connecter
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
+
     #[Route('/connexion', name: 'security.login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -22,11 +29,23 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * Ce contrôleur nous permet de nous déconnecter
+     *
+     * @return void
+     */
+
     #[Route('/deconnexion', 'security.logout')]
-    public function logout()
-    {
-        // Nothing to do here..
+    public function logout(){
     }
+
+    /**
+     * Ce contrôleur nous permet de créé un nouveau administateur
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
 
     #[Route('/inscription', 'security.registration', methods: ['GET', 'POST'])]
     public function registration(Request $request, EntityManagerInterface $manager): Response

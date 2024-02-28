@@ -15,6 +15,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
 {
+    /**
+     * Ce contrôleur affiche tous les véhicules
+     *
+     * @param VehiculeRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+
     #[Route('/admin', name: 'app_admin', methods: ['GET'])]
     public function index(VehiculeRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -27,6 +36,14 @@ class AdminController extends AbstractController
             'vehicules' => $vehicules,
         ]);
     }
+
+    /**
+     * Ce contrôleur affiche un formulaire qui crée un véhicule
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
 
     #[Route('/admin/creation', 'vehicule.new')]
     public function new(
@@ -50,6 +67,15 @@ class AdminController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * Ce contrôleur nous permet de modifier un véhicule
+     *
+     * @param Vehicule $vehicule
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
 
     #[Route('/admin/edition/{id}', 'vehicule.edit', methods: ['GET', 'POST'])]
     public function edit(
@@ -78,6 +104,14 @@ class AdminController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * Ce contrôleur nous permet de supprimer un véhicule
+     *
+     * @param EntityManagerInterface $manager
+     * @param Vehicule $vehicule
+     * @return Response
+     */
 
     #[Route('/admin/suppression/{id}', 'vehicule.delete', methods: ['GET'])]
     public function delete(

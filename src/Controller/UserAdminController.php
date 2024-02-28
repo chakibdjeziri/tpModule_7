@@ -14,6 +14,16 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserAdminController extends AbstractController
 {
+    /**
+     * Ce contrôleur nous permet de modifier le profil de l'administrateur connecter
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param UserAdmin $user
+     * @param UserPasswordHasherInterface $hasher
+     * @return Response
+     */
+
     #[Route('/utilisateur/edition/{id}', name: 'user.edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
@@ -56,6 +66,15 @@ class UserAdminController extends AbstractController
         ]);
     }
 
+    /**
+     * Ce contrôleur nous permet de modifier le mot de passe de l'adminitrateur connecter
+     *
+     * @param UserAdmin $user
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @param UserPasswordHasherInterface $hasher
+     * @return Response
+     */
 
     #[Route('/utilisateur/edition-mot-de-passe/{id}', 'user.edit.password', methods: ['GET', 'POST'])]
     public function editPassword(
@@ -96,6 +115,13 @@ class UserAdminController extends AbstractController
         ]);
     }
 
+    /**
+     * Ce contrôleur nous permet de supprimer le compte de l'administrateur connecter
+     *
+     * @param EntityManagerInterface $manager
+     * @param UserAdmin $user
+     * @return Response
+     */
 
     #[Route('/utilisateur/suppression/{id}', 'user.delete', methods: ['GET'])]
     public function delete(

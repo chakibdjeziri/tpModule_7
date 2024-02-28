@@ -13,7 +13,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home', methods: ['GET'])]
+    /**
+     * Ce contrôleur affiche tous les véhicules
+     *
+     * @param VehiculeRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+
+     #[Route('/', name: 'app_home', methods: ['GET'])]
     public function index(VehiculeRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $vehicules = $paginator->paginate(
