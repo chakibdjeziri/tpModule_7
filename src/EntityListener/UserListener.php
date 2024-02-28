@@ -23,13 +23,12 @@ class UserListener
     {
         $this->encodePassword($UserAdmin);
     }
-
-    /**
-     * Encode password based on plain password
-     *
-     * @param Admin $admin
-     * @return void
-     */
+     /**
+      * Encode password based on plain password
+      *
+      * @param UserAdmin $UserAdmin
+      * @return void
+      */
     public function encodePassword(UserAdmin $UserAdmin)
     {
         if ($UserAdmin->getPlainPassword() === null) {

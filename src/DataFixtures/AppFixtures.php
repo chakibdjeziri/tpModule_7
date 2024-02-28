@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // Users
+        // UsersAdmin
         $users = [];
 
         $admin = new UserAdmin();
@@ -32,7 +32,7 @@ class AppFixtures extends Fixture
         $users[] = $admin;
         $manager->persist($admin);
 
-
+        // Véhicules
         for ($i = 1; $i < 51; $i++) {
             $vehicule = new Vehicule();
             $vehicule->setNom('BMW')
