@@ -70,7 +70,7 @@ class VehiculeType extends AbstractType
                     'minlength' => '1',
                     'maxlength' => '255'
                 ],
-                'label' => 'image',
+                'label' => 'URL de l\'image',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
