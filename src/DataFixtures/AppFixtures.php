@@ -33,7 +33,7 @@ class AppFixtures extends Fixture
         $manager->persist($admin);
 
         // Véhicules
-        for ($i = 1; $i < 51; $i++) {
+        for ($i = 1; $i < 31; $i++) {
             $vehicule = new Vehicule();
             $vehicule->setNom('BMW')
                 ->setModele('M3')
